@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>sw demo</title>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="../sw-embed/dist/sw.js"></script>
+  <link rel="stylesheet" href="./main.css" />  
+ </head>
+ <body>
+  <sw-channel id="0">
+   <div slot="header">
+	<link rel="stylesheet" href="./channel-header.css" />  
+    <img sw-channel-banner />
+   </div>
+   <div slot="collections">
+   <link rel="stylesheet" href="./channel-collections.css" /> 
+    <div class="swChannelCollectionContainer">
+     <sw-collection>
+      <div slot="header">
+       <h3 sw-collection-name></h3>
+      </div>
+      <span slot="media">
+       <sw-media>
+        <span slot="media">
+		<link rel="stylesheet" href="./media.css" /> 
+         <a sw-media-link>
+          <img sw-media-thumbnail />
+          <br />
+          <span sw-media-name></span>
+         </a>
+        </span>
+       </sw-media>
+      </span>
+     </sw-collection>
+    </div>
+   </div>
+  </sw-channel>
+ </body>
+</html>

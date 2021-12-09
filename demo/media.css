@@ -1,0 +1,14 @@
+[sw-media-link] {
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+  margin-right: 2em;
+}
+[sw-media-link] > img {
+  width: 217px;
+  height: 128px;
+}
+[sw-media-name] {
+  color: rgb(100, 100, 100);
+  font-size: 80%;
+}
