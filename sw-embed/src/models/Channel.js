@@ -1,19 +1,18 @@
-import Collection from "@/models/Collection";
-import Media from "@/models/Media";
+import Collection from "./Collection";
+import Media from "./Media";
 
 export default class Channel {
-  name!: string;
-  collections!: Array<Collection>;
-  bannerUrl!: string;
+  name = "";
+  collections = [];
+  bannerUrl = "";
 
-  constructor(initData: Channel) {
+  constructor(initData) {
     this.name = initData.name;
     this.collections = initData.collections;
     this.bannerUrl = initData.bannerUrl;
   }
 
-  static getMocks(): Array<Channel> {
-    const imageContext = require.context("../assets/", false, /\.png$/);
+  static getMocks() {
     return [
       new Channel({
         name: "City of Huntington Beach",
@@ -43,7 +42,7 @@ export default class Channel {
             ],
           }),
         ],
-        bannerUrl: imageContext("./topshelf-ultra-wide-2x.png"),
+        bannerUrl: "./demo_res/banner.png",
       }),
       new Channel({
         name: "CMAC",
@@ -73,7 +72,7 @@ export default class Channel {
             ],
           }),
         ],
-        bannerUrl: imageContext("./logo.png"),
+        bannerUrl: "./demo_res/banner.png",
       }),
     ];
   }

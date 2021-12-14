@@ -1,9 +1,9 @@
 export default class Media {
-  name!: string;
-  url!: string;
-  thumbnailUrl!: string;
+  name = "";
+  url = "";
+  thumbnailUrl = "";
 
-  constructor(initData: Media) {
+  constructor(initData) {
     this.name = initData.name;
     this.url = initData.url;
     this.thumbnailUrl = initData.thumbnailUrl;

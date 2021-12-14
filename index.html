@@ -1,40 +1,23 @@
 <!DOCTYPE html>
 <html>
  <head>
-  <meta charset="utf-8">
-  <title>sw demo</title>
-  <script src="https://unpkg.com/vue"></script>
-  <script src="sw-embed/dist/sw.js"></script>
-  <link rel="stylesheet" href="demo_css/main.css" />  
+  <script src="sw-embed/dist/sw-embed.js" defer></script>
+  <link rel="stylesheet" href="demo_res/sw-embed.css" />
+  <link rel="stylesheet" href="demo_res/demo.css" />
  </head>
  <body>
   <sw-channel id="0">
-   <div slot="header">
-	<link rel="stylesheet" href="demo_css/channel-header.css" />  
-    <img sw-channel-banner />
-   </div>
-   <div slot="collections">
-   <link rel="stylesheet" href="demo_css/channel-collections.css" /> 
-    <div class="swChannelCollectionContainer">
-     <sw-collection>
-      <div slot="header">
-       <h3 sw-collection-name></h3>
-      </div>
-      <span slot="media">
-       <sw-media>
-        <span slot="media">
-		<link rel="stylesheet" href="demo_css/media.css" /> 
-         <a sw-media-link>
-          <img sw-media-thumbnail />
-          <br />
-          <span sw-media-name></span>
-         </a>
-        </span>
-       </sw-media>
-      </span>
-     </sw-collection>
-    </div>
-   </div>
+   <img sw-channel-banner />
+   <sw-collection>
+    <h2 sw-collection-name></h2>
+    <sw-media>
+     <a sw-media-link>
+      <img sw-media-thumbnail />
+      <br />
+      <span sw-media-name></span>
+     </a>    
+    </sw-media>
+   </sw-collection>
   </sw-channel>
  </body>
 </html>
