@@ -1,15 +1,21 @@
+import Model from "./Model.js";
 import Collection from "./Collection";
 import Media from "./Media";
 
-export default class Channel {
+export default class Channel extends Model{
+  id = 0;
   name = "";
   collections = [];
   bannerUrl = "";
+  logoUrl = "";
 
   constructor(initData) {
-    this.name = initData.name;
-    this.collections = initData.collections;
-    this.bannerUrl = initData.bannerUrl;
+    super();
+    if(initData.id) this.id = initData.id;
+    if(initData.name) this.name = initData.name;
+    if(initData.collections) this.collections = initData.collections;
+    if(initData.bannerUrl) this.bannerUrl = initData.bannerUrl;
+    if(initData.logoUrl) this.logoUrl = initData.logoUrl;
   }
 
   static getMocks() {
