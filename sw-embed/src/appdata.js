@@ -6,9 +6,9 @@ import Channel from "./models/Channel.js";
 import Collection from "./models/Collection.js";
 
 export default class Appdata {
-  //static apiUrl = "https://screenweave-launch.herokuapp.com/api/";
-  //static apiUrl = "https://api.screenweave.com/appdata/";
-  static apiUrl = "http://192.168.7.55:8080/";
+  static apiUrl = "https://screenweave-next.herokuapp.com/"; //stage
+  //static apiUrl = "https://api.screenweave.com/"; //prod
+  //static apiUrl = "http://192.168.7.55:8080/"; //local dev
 
   /*
     returns {jwt, channelIdAdded, channelIdRemoved}
