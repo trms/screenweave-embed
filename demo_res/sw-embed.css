@@ -8,13 +8,12 @@ sw-channel > img {
   max-width: 100%;
 }
 
-sw-collection {
-  display: block;
+sw-collection, sw-video-details {
   margin: 0 auto 0 auto;
   text-align: left;
   width: fit-content;
-
-  max-width: 1280px;
+  max-width: 1000px;
+  display: block;
 }
 
 sw-media {
@@ -31,4 +30,32 @@ sw-media > a {
 sw-media > a > img {
   width: 160px;
   height: 90px;
+}
+
+sw-video-details > img {
+  float: left;
+  width: 480px;
+  height: 270px;
+  margin: 0 1em 1em 0;
+}
+
+sw-video-details > a {
+  clear: both;
+  display: block;
+}
+
+sw-video-details > p {
+  color: rgb(50,50,50);
+  font-size: 90%;
+}
+
+sw-video-details > button {
+  background-color: rgb(255,255,255);
+  border-radius: 6px;
+  border-width: 1px;
+  border-color: rgb(209, 213, 219);
+  border-style: solid;
+  padding: 1em 1.5em 1em 1.5em;
+  font-weight: 500;
+  font-size: 102%;
 }

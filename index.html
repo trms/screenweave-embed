@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
  <head>
+  <meta charset="utf-8" />
   <script src="sw-embed/dist/sw-embed.js" defer></script>
   <link rel="stylesheet" href="demo_res/sw-embed.css" />
   <link rel="stylesheet" href="demo_res/demo.css" />
@@ -11,13 +12,19 @@
    <sw-collection>
     <h2 sw-collection-name></h2>
     <sw-media>
-     <a sw-media-link>
+     <a href="#" sw-media-link>
       <img sw-media-thumbnail />
-      <br />
-      <span sw-media-name></span>
+      <div sw-media-name></div>
      </a>    
     </sw-media>
    </sw-collection>
+   <sw-video-details>
+    <img sw-video-details-thumbnail />
+    <h2 sw-video-details-title></h2>
+    <p sw-video-details-description></p>
+    <button type="button">▶ Play</button>
+    <a href="#" sw-video-details-back>Back to Collections</a>
+   </sw-video-details>
   </sw-channel>
  </body>
 </html>
