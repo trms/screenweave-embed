@@ -3,7 +3,7 @@
  <head>
   <meta charset="utf-8" />
   <script src="sw-embed/dist/sw-embed.js" defer></script>
-  <link rel="stylesheet" href="demo_res/sw-embed.css" />
+  <link rel="stylesheet" href="sw-embed/dist/sw-embed.css" />
   <link rel="stylesheet" href="demo_res/demo.css" />
  </head>
  <body>
@@ -22,9 +22,15 @@
     <img sw-video-details-thumbnail />
     <h2 sw-video-details-title></h2>
     <p sw-video-details-description></p>
-    <button type="button">▶ Play</button>
+    <button type="button" sw-video-details-play-button>▶ Play</button>
     <a href="#" sw-video-details-back>Back to Collections</a>
    </sw-video-details>
+   <sw-player>
+    <div sw-player-video-tag-wrapper>
+     <video class="video-js"></video>
+    </div>
+    <a href="#" sw-player-back>Back to Collections</a>
+   </sw-player>
   </sw-channel>
  </body>
 </html>

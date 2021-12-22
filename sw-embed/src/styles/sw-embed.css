@@ -8,7 +8,7 @@ sw-channel > img {
   max-width: 100%;
 }
 
-sw-collection, sw-video-details {
+sw-collection, sw-video-details, sw-player {
   margin: 0 auto 0 auto;
   text-align: left;
   width: fit-content;
@@ -58,4 +58,5 @@ sw-video-details > button {
   padding: 1em 1.5em 1em 1.5em;
   font-weight: 500;
   font-size: 102%;
+  cursor:pointer;
 }

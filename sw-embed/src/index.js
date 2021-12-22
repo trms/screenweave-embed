@@ -1,16 +1,22 @@
 "use strict";
 import "core-js";
 import "regenerator-runtime/runtime";
+import Appdata from './appdata.js';
+import videojs from "video.js";
+import "video.js/dist/video-js.min.css";
 
 import channelTemplate from './templates/channel.html';
 import collectionTemplate from './templates/collection.html';
 import mediaTemplate from './templates/media.html';
 import videoDetailsTemplate from './templates/video-details.html';
-import Appdata from './appdata.js';
+import playerTemplate from './templates/player.html';
+
+import "./styles/sw-embed.css";
 
 class ScreenweaveEmbed {
   static async setup() {
     const channelElements = document.querySelectorAll("sw-channel");
+    for(const channelElement of channelElements) ScreenweaveEmbed.hideChannelSubcomponents(channelElement);
     const data = await Appdata.loadData(channelElements);
     if(!data) return null;
     for(const channelElement of channelElements) {
@@ -27,6 +33,7 @@ class ScreenweaveEmbed {
       ScreenweaveEmbed.normalizeFirstRemoveRest(channelElement.querySelectorAll("sw-collection"), collectionTemplate);
       ScreenweaveEmbed.normalizeFirstRemoveRest(channelElement.querySelectorAll("sw-collection sw-media"), mediaTemplate);
       ScreenweaveEmbed.normalizeFirstRemoveRest(channelElement.querySelectorAll("sw-video-details"), videoDetailsTemplate);
+      ScreenweaveEmbed.normalizeFirstRemoveRest(channelElement.querySelectorAll("sw-player"), playerTemplate);
   }
 
   static normalizeFirstRemoveRest(elements, template) {
@@ -97,30 +104,78 @@ class ScreenweaveEmbed {
     if(!videoDetailsElement) {
       console.log(`Channel ${channelData.id} contained no video details tag!`);
     }else{
-      const backElements = videoDetailsElement.querySelectorAll("a");
-      for(const backElement of backElements)
+      for(const backElement of videoDetailsElement.querySelectorAll("[sw-video-details-back]"))
+        backElement.onclick = () => {ScreenweaveEmbed.showCollections(channelElement)};
+    }
+
+    //universal parts of Player
+    const playerElement = channelElement.querySelector("sw-player");
+    if(!playerElement) {
+      console.log(`Channel ${channelData.id} contained no player tag!`);
+    }else{
+      for(const backElement of playerElement.querySelectorAll("[sw-player-back]"))
         backElement.onclick = () => {ScreenweaveEmbed.showCollections(channelElement)};
     }
   }
 
-  static showCollections(channelElement) {
+  static hideChannelSubcomponents(channelElement) {
     for(const collection of channelElement.querySelectorAll("sw-collection"))
-      collection.style.display = null;
+      collection.style.display = "none";
     for(const details of channelElement.querySelectorAll("sw-video-details"))
       details.style.display = "none";
+    for(const player of channelElement.querySelectorAll("sw-player")) {
+      for(const videoElement of player.querySelectorAll("video")) {
+        videojs(videoElement).dispose();
+      }
+      player.style.display = "none";
+    }
+  }
+
+  static showCollections(channelElement) {
+    ScreenweaveEmbed.hideChannelSubcomponents(channelElement);
+    for(const collection of channelElement.querySelectorAll("sw-collection"))
+      collection.style.display = null;
   }
 
   static showVideoDetails(channelElement, mediaObject) {
-    for(const collection of channelElement.querySelectorAll("sw-collection"))
-      collection.style.display = "none";
+    ScreenweaveEmbed.hideChannelSubcomponents(channelElement);
     for(const details of channelElement.querySelectorAll("sw-video-details")) {
       details.style.display = null;
+      for(const playButtonElement of details.querySelectorAll("[sw-video-details-play-button]"))
+        playButtonElement.onclick = () => {ScreenweaveEmbed.showPlayer(channelElement, mediaObject)};
       for(const thumbnailElement of details.querySelectorAll("[sw-video-details-thumbnail]"))
         thumbnailElement.setAttribute("src", mediaObject.thumbnailUrl);
       for(const titleElement of details.querySelectorAll("[sw-video-details-title]"))
         titleElement.textContent = mediaObject.title;
       for(const descriptionElement of details.querySelectorAll("[sw-video-details-description]"))
-      descriptionElement.textContent = mediaObject.description;
+        descriptionElement.textContent = mediaObject.description;
+    }
+  }
+
+  static showPlayer(channelElement, mediaObject) {
+    ScreenweaveEmbed.hideChannelSubcomponents(channelElement);
+    for(const player of channelElement.querySelectorAll("sw-player")) {
+      player.style.display = null;
+      for(const videoElementWrapper of player.querySelectorAll("[sw-player-video-tag-wrapper]")) {
+        videoElementWrapper.innerHTML = "<video class='video-js'></video>";
+        for(const videoElement of videoElementWrapper.querySelectorAll("video")) {
+          videojs(videoElement, {
+            controls: true,
+            poster: mediaObject.thumbnailUrl,
+            sources: [
+              {
+                src: mediaObject.url,
+                type: "application/vnd.apple.mpegurl",
+              },
+            ],
+            html5: {
+              vhs: {
+                useDevicePixelRatio: true,
+              },
+            },
+          });
+        }
+      }
     }
   }
 }

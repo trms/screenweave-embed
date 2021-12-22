@@ -4,6 +4,7 @@ import html from 'rollup-plugin-html';
 import { terser } from "rollup-plugin-terser";
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
+import css from "rollup-plugin-import-css";
 
 const config = {
   input: 'src/index.js',
@@ -14,6 +15,7 @@ const config = {
   plugins: [
     json(),
     html({ include: '**/*.html' }),
+    css(),
     resolve(),
     commonjs({ include: 'node_modules/**' }),
     babel({ babelHelpers: 'bundled' }),
