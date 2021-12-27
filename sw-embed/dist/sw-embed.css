@@ -3,6 +3,7 @@ sw-channel {
   width: 100%;
   display: block;
   text-align: center;
+  visibility: hidden;
 }
 
 sw-channel > img {
@@ -12,9 +13,12 @@ sw-channel > img {
 sw-collection, sw-video-details, sw-player {
   margin: 0 auto 0 auto;
   text-align: left;
-  width: fit-content;
   max-width: 1000px;
   display: block;
+}
+
+sw-collection, sw-player {
+  width: fit-content;
 }
 
 sw-media {
@@ -31,6 +35,10 @@ sw-media > a {
 sw-media > a > img {
   width: 160px;
   height: 90px;
+}
+
+sw-video-details {
+  width: auto;
 }
 
 sw-video-details > img {

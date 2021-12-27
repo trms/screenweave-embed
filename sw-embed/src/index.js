@@ -23,6 +23,7 @@ class ScreenweaveEmbed {
       ScreenweaveEmbed.normalizeChannel(channelElement);
       await ScreenweaveEmbed.insertData(channelElement, data.channelsById[data.code2id[channelElement.getAttribute("code")]]);
       ScreenweaveEmbed.showCollections(channelElement);
+      channelElement.style.visibility = "visible";
     }
   }
 
