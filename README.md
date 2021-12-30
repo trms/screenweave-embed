@@ -27,9 +27,10 @@ That's it! An interface wil be generated from your channel and allow browsing of
 </html>
 ```
 
-### Fully custom layout
+### Custom layout
 
 Putting any content inside a sw-* tag switches it to renderless mode where it only renders the markup you provide, and the data from your channel is applied to those tags with sw-* attributes. The "subcomponents" for collection and channel must only be specified once and will get automatically repeated per the content in your channel. This example custom layout is the same as the default layout.
+You can also use the default layout for nested sw-* tags (by leaving them empty) while customizing the parent and/or siblings.
 ```html
 <!DOCTYPE html>
 <html>
@@ -41,58 +42,51 @@ Putting any content inside a sw-* tag switches it to renderless mode where it on
  <body>
   <sw-channel code="INVITECODE">
    <img sw-channel-banner />
-   <sw-collection>
-    <h2 sw-collection-name></h2>
-    <sw-media>
-     <a href="#" sw-media-link>
-      <img sw-media-thumbnail />
-      <div sw-media-name></div>
-     </a>    
-    </sw-media>
-   </sw-collection>
-   <sw-video-details>
-    <img sw-video-details-thumbnail />
-    <h2 sw-video-details-title></h2>
-    <p sw-video-details-description></p>
-    <button type="button" sw-video-details-play-button>▶ Play</button>
-    <a href="#" sw-video-details-back>Back to Collections</a>
-   </sw-video-details>
-   <sw-player>
-    <div sw-player-video-tag-wrapper>
-     <video class="video-js"></video>
-    </div>
-    <a href="#" sw-player-back>Back to Collections</a>
-   </sw-player>
+   <div>
+    <sw-collection>
+     <h2 sw-collection-name></h2>
+     <sw-media>
+      <a href="#" sw-media-link>
+       <img sw-media-thumbnail />
+       <div sw-media-name></div>
+      </a>    
+     </sw-media>
+    </sw-collection>
+    <sw-video-details>
+     <div>
+      <img sw-video-details-thumbnail />
+      <a href="#" sw-video-details-back>Back to Collections</a>
+     </div>
+     <div>
+      <h2 sw-video-details-title></h2>
+      <p sw-video-details-description></p>
+      <button type="button" sw-video-details-play-button>
+       <img src="data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhciIgZGF0YS1pY29uPSJwbGF5LWNpcmNsZSIgY2xhc3M9InN2Zy1pbmxpbmUtLWZhIGZhLXBsYXktY2lyY2xlIGZhLXctMTYiIHJvbGU9ImltZyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMzcxLjcgMjM4bC0xNzYtMTA3Yy0xNS44LTguOC0zNS43IDIuNS0zNS43IDIxdjIwOGMwIDE4LjQgMTkuOCAyOS44IDM1LjcgMjFsMTc2LTEwMWMxNi40LTkuMSAxNi40LTMyLjggMC00MnpNNTA0IDI1NkM1MDQgMTE5IDM5MyA4IDI1NiA4UzggMTE5IDggMjU2czExMSAyNDggMjQ4IDI0OCAyNDgtMTExIDI0OC0yNDh6bS00NDggMGMwLTExMC41IDg5LjUtMjAwIDIwMC0yMDBzMjAwIDg5LjUgMjAwIDIwMC04OS41IDIwMC0yMDAgMjAwUzU2IDM2Ni41IDU2IDI1NnoiPjwvcGF0aD48L3N2Zz4=" />
+       Play
+      </button>
+     </div>
+    </sw-video-details>
+    <sw-player>
+     <div sw-player-video-tag-wrapper>
+      <video class="video-js"></video>
+     </div>
+     <a href="#" sw-player-back>Back to Collections</a>
+    </sw-player>
+   </div>
   </sw-channel>
  </body>
 </html>
 ```
-Note that the more your custom layout deviates from the default, the less effective sw-embed.css will be at making it look good, thus very custom layouts may necessitate a custom replacement for sw-embed.css.
 
-### Partially custom layout
+### Very custom layout
 
-You can use the default layout for nested sw-* tags (by leaving them empty) while customizing the parent and/or siblings.
+Note that the more your custom layout deviates from the default, the less effective sw-embed.css will be at making it look good, thus very custom layouts may necessitate doing your own styles and not importing sw-embed.css -- in this case you'll probably want to still import the styles for the video player directly.
 ```html
-<!DOCTYPE html>
-<html>
+ [ . . . ]
  <head>
   <meta charset="utf-8" />
   <script src="sw-embed/dist/sw-embed.js" defer></script>
-  <link rel="stylesheet" href="sw-embed/dist/sw-embed.css" />
+  <link href="https://vjs.zencdn.net/7.17.0/video-js.css" rel="stylesheet" />
  </head>
- <body>
-  <sw-channel code="INVITECODE">
-   <img sw-channel-banner />
-   <sw-collection></sw-collection>
-   <sw-video-details>
-    <img sw-video-details-thumbnail />
-    <h2 sw-video-details-title></h2>
-    <p sw-video-details-description></p>
-    <button type="button" sw-video-details-play-button>▶ Play</button>
-    <a href="#" sw-video-details-back>Back to Collections</a>
-   </sw-video-details>
-   <sw-player></sw-player>
-  </sw-channel>
- </body>
-</html>
+ [ . . . ]
 ```

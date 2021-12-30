@@ -58,7 +58,6 @@ class ScreenweaveEmbed {
     //iterate collections
     const oldCollectionElement = channelElement.querySelector("sw-collection");
     const newCollectionsContainer = document.createElement("span");
-    newCollectionsContainer.setAttribute("sw-collections-container", "1");
     if(!oldCollectionElement) {
       console.log(`Channel ${channelData.id} contained no collection tag!`);
     }else{
@@ -71,7 +70,6 @@ class ScreenweaveEmbed {
         //iterate media
         const oldMediaElement = collectionElementClone.querySelector("sw-media");
         const newMediaContainer = document.createElement("span");
-        newCollectionsContainer.setAttribute("sw-media-container", "1");
         if(!oldMediaElement) {
           console.log(`Collection elements in channel ${channelData.id} contain no media tag!`);
         }else{
@@ -158,7 +156,7 @@ class ScreenweaveEmbed {
     for(const player of channelElement.querySelectorAll("sw-player")) {
       player.style.display = null;
       for(const videoElementWrapper of player.querySelectorAll("[sw-player-video-tag-wrapper]")) {
-        videoElementWrapper.innerHTML = "<video class='video-js'></video>";
+        videoElementWrapper.innerHTML = "<video class='video-js vjs-big-play-centered'></video>";
         for(const videoElement of videoElementWrapper.querySelectorAll("video")) {
           videojs(videoElement, {
             controls: true,
