@@ -18,8 +18,8 @@ That's it! An interface will be generated from your channel and allow browsing o
 <html>
  <head>
   <meta charset="utf-8" />
-  <script src="sw-embed/dist/sw-embed.js" defer></script>
-  <link rel="stylesheet" href="sw-embed/dist/sw-embed.css" />
+  <script src="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/sw-embed.js" defer></script>
+  <link rel="stylesheet" href="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/sw-embed.css" />
  </head>
  <body>
   <sw-channel code="INVITECODE"></sw-channel>
@@ -36,8 +36,8 @@ You can also use the default layout for nested sw-* tags (by leaving them empty)
 <html>
  <head>
   <meta charset="utf-8" />
-  <script src="sw-embed/dist/sw-embed.js" defer></script>
-  <link rel="stylesheet" href="sw-embed/dist/sw-embed.css" />
+  <script src="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/sw-embed.js" defer></script>
+  <link rel="stylesheet" href="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/sw-embed.css" />
  </head>
  <body>
   <sw-channel code="INVITECODE">
@@ -77,7 +77,7 @@ Note that the more your custom layout deviates from the default, the less effect
  [ . . . ]
  <head>
   <meta charset="utf-8" />
-  <script src="sw-embed/dist/sw-embed.js" defer></script>
+  <script src="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/sw-embed.js" defer></script>
   <link href="https://vjs.zencdn.net/7.17.0/video-js.css" rel="stylesheet" />
  </head>
  [ . . . ]
