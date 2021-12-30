@@ -8,7 +8,7 @@ Use this to embed your Screenweave Channel in your website. Demo: <https://trms.
 2. Include sw-embed.css unless you plan to style the channel from scratch
 3. Put a tag `<sw-channel></sw-channel>` somewhere on your page and pass it the Invite Code of your channel.
 
-That's it! An interface wil be generated from your channel and allow browsing of all its Collections and playing individual videos, similar to the app. The interface is designed to inherit the styles of your site to fit in well out of the box.
+That's it! An interface will be generated from your channel and allow browsing of all its Collections and playing individual videos, similar to the app. The interface is designed to inherit the styles of your site to fit in well out of the box.
 
 ## Examples
 ### Minimal example using default layout
