@@ -53,25 +53,17 @@ You can also use the default layout for nested sw-* tags (by leaving them empty)
      </sw-media>
     </sw-collection>
     <sw-video-details>
-     <div>
-      <img sw-video-details-thumbnail />
-      <a href="#" sw-video-details-back>Back to Collections</a>
-     </div>
-     <div>
-      <h2 sw-video-details-title></h2>
-      <p sw-video-details-description></p>
-      <button type="button" sw-video-details-play-button>
-       <img src="data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhciIgZGF0YS1pY29uPSJwbGF5LWNpcmNsZSIgY2xhc3M9InN2Zy1pbmxpbmUtLWZhIGZhLXBsYXktY2lyY2xlIGZhLXctMTYiIHJvbGU9ImltZyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMzcxLjcgMjM4bC0xNzYtMTA3Yy0xNS44LTguOC0zNS43IDIuNS0zNS43IDIxdjIwOGMwIDE4LjQgMTkuOCAyOS44IDM1LjcgMjFsMTc2LTEwMWMxNi40LTkuMSAxNi40LTMyLjggMC00MnpNNTA0IDI1NkM1MDQgMTE5IDM5MyA4IDI1NiA4UzggMTE5IDggMjU2czExMSAyNDggMjQ4IDI0OCAyNDgtMTExIDI0OC0yNDh6bS00NDggMGMwLTExMC41IDg5LjUtMjAwIDIwMC0yMDBzMjAwIDg5LjUgMjAwIDIwMC04OS41IDIwMC0yMDAgMjAwUzU2IDM2Ni41IDU2IDI1NnoiPjwvcGF0aD48L3N2Zz4=" />
-       Play
-      </button>
-     </div>
+      <div>
+        <div sw-player-video-tag-wrapper>
+         <video class="video-js"></video>
+        </div>
+        <a href="#" sw-video-details-back>Back to Collections</a>
+       </div>
+       <div>
+        <h2 sw-video-details-title></h2>
+        <p sw-video-details-description></p>
+       </div>
     </sw-video-details>
-    <sw-player>
-     <div sw-player-video-tag-wrapper>
-      <video class="video-js"></video>
-     </div>
-     <a href="#" sw-player-back>Back to Collections</a>
-    </sw-player>
    </div>
   </sw-channel>
  </body>
