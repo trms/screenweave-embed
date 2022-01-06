@@ -1,6 +1,9 @@
 sw-channel {
   width: 100%;
   text-align: center;
+}
+
+sw-channel, sw-collection:not(sw-channel sw-collection), sw-video-details:not(sw-channel sw-video-details):not(sw-collection sw-video-details) {
   visibility: hidden;
 }
 
@@ -21,7 +24,7 @@ sw-collection {
   margin-bottom: 2.5rem;
 }
 
-sw-collection > span, sw-video-details {
+sw-collection > span, sw-collection:not(sw-channel sw-collection) > div > span, sw-video-details {
   display: grid;
   row-gap: 2.5rem;
 }
@@ -69,7 +72,7 @@ sw-channel h2 {
 }
 
 @media only screen and (max-width:639px) { /* xs */
-  sw-collection > span {
+  sw-collection > span, sw-collection:not(sw-channel sw-collection) > div > span {
     grid-template-columns: repeat(1, minmax(0, 1fr));
     column-gap: 1.5rem;
   }
@@ -85,7 +88,7 @@ sw-channel h2 {
 }
 
 @media only screen and (min-width:640px) and (max-width: 767px) { /* sm */
-  sw-collection > span {
+  sw-collection > span, sw-collection:not(sw-channel sw-collection) > div > span {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 1.5rem;
   }
@@ -101,7 +104,7 @@ sw-channel h2 {
 }
 
 @media (min-width:768px) and (max-width: 1023px) { /* md */
-  sw-collection > span {
+  sw-collection > span, sw-collection:not(sw-channel sw-collection) > div > span {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 1.5rem;
   }
@@ -117,7 +120,7 @@ sw-channel h2 {
 }
 
 @media only screen and (min-width:1024px) and (max-width: 1279px) { /* lg */
-  sw-collection > span {
+  sw-collection > span, sw-collection:not(sw-channel sw-collection) > div > span {
     grid-template-columns: repeat(5, minmax(0, 1fr));
     column-gap: 1.5rem;
   }
@@ -133,7 +136,7 @@ sw-channel h2 {
 }
 
 @media only screen and (min-width:1280px) and (max-width: 1535px) { /* xl */
-  sw-collection > span {
+  sw-collection > span, sw-collection:not(sw-channel sw-collection) > div > span {
     grid-template-columns: repeat(5, minmax(0, 1fr));
     column-gap: 2rem;
   }
@@ -149,7 +152,7 @@ sw-channel h2 {
 }
 
 @media only screen and (min-width:1536px) { /* 2xl */
-  sw-collection > span {
+  sw-collection > span, sw-collection:not(sw-channel sw-collection) > div > span {
     grid-template-columns: repeat(5, minmax(0, 1fr));
     column-gap: 2rem;
   }

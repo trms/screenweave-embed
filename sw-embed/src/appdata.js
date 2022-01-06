@@ -6,8 +6,9 @@ import Channel from "./models/Channel.js";
 import Collection from "./models/Collection.js";
 
 export default class Appdata {
-  static apiUrl = "https://screenweave-next.herokuapp.com/"; //stage
+  //static apiUrl = "https://screenweave-next.herokuapp.com/"; //stage
   //static apiUrl = "https://api.screenweave.com/"; //prod
+  static apiUrl = "https://launch.screenweave.com/"; //launch?
   //static apiUrl = "http://192.168.7.55:8080/"; //local dev
 
   /*
@@ -50,14 +51,7 @@ export default class Appdata {
     return (await response.json()).channels;
   }
 
-  static async loadData(channelElements) {
-    //get invite codes from attrs
-    let inviteCodes = [];
-    for(const channelElement of channelElements) {
-      const inviteCode = channelElement.getAttribute("code");
-      if(inviteCode) inviteCodes.push(inviteCode);
-    }
-
+  static async loadData(inviteCodes) {
     //get local cached jwt info, if any
     let jwtInfoJson = localStorage.getItem("jwtInfo");
     let jwtInfoDecoded = {jwt: null, code2id: {}};
@@ -93,7 +87,7 @@ export default class Appdata {
           }
           outMedia.push(new Media({url: appdataVideo.url, type: appdataVideo.type, title: appdataVideo.title, thumbnailUrl: thumbnailUrl, showId: appdataVideo.show_id, description: appdataVideo.description}));
         }
-        outCollections.push(new Collection({name: appdataCollection.name, media: outMedia}));
+        outCollections.push(new Collection({id: appdataCollection.id, name: appdataCollection.name, media: outMedia}));
       }
       outChannels[appdataChannel.id] = new Channel({id: appdataChannel.id, name: appdataChannel.name, collections: outCollections, bannerUrl: appdataChannel.banner_url, logoUrl: appdataChannel.logo_url});
     }

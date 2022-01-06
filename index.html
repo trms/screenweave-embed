@@ -2,36 +2,18 @@
 <html>
  <head>
   <meta charset="utf-8" />
-  <script src="sw-embed/dist/sw-embed.js" defer></script>
-  <link rel="stylesheet" href="sw-embed/dist/sw-embed.css" />
-  <link rel="stylesheet" href="demo_res/demo.css" />
  </head>
  <body>
-  <sw-channel code="DEVCODE1">
-   <img sw-channel-banner />
-   <div>
-    <sw-collection>
-     <h2 sw-collection-name></h2>
-     <sw-media>
-      <a href="#" sw-media-link>
-       <img sw-media-thumbnail />
-       <div sw-media-name></div>
-      </a>    
-     </sw-media>
-    </sw-collection>
-    <sw-video-details>
-      <div>
-        <div sw-player-video-tag-wrapper>
-         <video class="video-js"></video>
-        </div>
-        <a href="#" sw-video-details-back>Back to Collections</a>
-       </div>
-       <div>
-        <h2 sw-video-details-title></h2>
-        <p sw-video-details-description></p>
-       </div>
-    </sw-video-details>
-   </div>
-  </sw-channel>
+  <h1>sw-embed demos</h1>
+  <dl>
+   <dt><a href="demo/minimal.html">Minimal</a></dt>                                        <dd>Shortest example giving a channel with default layout and styles</dd>
+   <dt><a href="demo/custom.html">Custom layout</a></dt>                                   <dd>A channel with fully custom layout same as the default, using default styles</dd>
+   <dt><a href="demo/verycustom.html">Custom everything</a></dt>                           <dd>A channel with fully custom layout very different from the default, using all custom styles</dd>
+   <dt><a href="demo/collection.html">Standalone collection</a></dt>                       <dd>A collection shown by itself, not as part of a channel view</dd>
+   <dt><a href="demo/details.html">Standalone video details</a><dt>                        <dd>A video details view with player shown by itself, not as part of a channel view. Shows the video having a given literal ID when accessed directly, but also accepts a query param from the next example to dynamically choose the video to show.</dd>
+   <dt><a href="demo/collectionhref.html">Standalone collection w/HREF navigation</a></dt> <dd>A collection shown by itself, and clicking opens the video details on a separate page</dd>
+   <dt><a href="demo/channelhref.html">Channel w/HREF navigation</a></dt>                  <dd>Whole channel where clicking opens the video details on a separate page</dd>
+   <dt><a href="demo/player.html">Just a player</a></dt>                                   <dd>Uses a stripped-down Video Details element to show just a player for a single video and nothing else</dd>
+  </dl>
  </body>
 </html>

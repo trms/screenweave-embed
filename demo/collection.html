@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <!-- The sw-embed resources are included via local copies here but you'll probably want to use the public URL shown in the README  -->
+  <script src="../sw-embed/dist/sw-embed.js" defer></script>
+  <link rel="stylesheet" href="../sw-embed/dist/sw-embed.css" />
+  <link rel="stylesheet" href="demo.css" /> <!-- These demo styles aren't part of the library. They represent the styles of the site that the lib is being used on, and demonstrate that outer styles affect the library elements -->
+  <title>Standalone collection</title>
+  <style>
+    body {
+      background-color: #e5e5f7;
+      background-image:  linear-gradient(#abafff 0.8px, transparent 0.8px), linear-gradient(90deg, #abafff 0.8px, transparent 0.8px), linear-gradient(#abafff 0.4px, transparent 0.4px), linear-gradient(90deg, #abafff 0.4px, #e5e5f7 0.4px);
+      background-size: 20px 20px, 20px 20px, 4px 4px, 4px 4px;
+      background-position: -0.8px -0.8px, -0.8px -0.8px, -0.4px -0.4px, -0.4px -0.4px;
+      height: 100vh;
+    }
+    .header{
+      width: 90%;
+      border: rgb(128,128,128) 0.5em outset;
+      margin: 1em auto 1em auto;
+      padding: 1em 0 1em 0;
+      text-align: center;
+      background-color: rgb(255,255,255);
+    }
+    .page {
+      width: 1024px;
+      border: rgb(128,128,128) 0.5em outset;
+      background-color: rgb(255,255,255);
+      margin: 0 auto 0 auto;
+      padding: 1em;
+    }
+  </style>
+ </head>
+ <body>
+  <div class="header">
+   My Site Header
+  </div>
+  <div class="page">
+   <sw-collection sw-invite-code="DEVCODE1" sw-collection-id="14">
+    <div>
+     <h2 sw-collection-name></h2>
+     <sw-media></sw-media>
+    </div>
+    <sw-video-details></sw-video-details>
+   </sw-collection>
+  </div>
+ </body>
+</html>

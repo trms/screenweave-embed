@@ -1,12 +1,16 @@
 "use strict";
 import "core-js";
 import "regenerator-runtime/runtime";
-import Appdata from './appdata.js';
-import videojs from "video.js";
 import "video.js/dist/video-js.min.css";
+
+import Appdata from './appdata.js';
+import EmbedChannel from './controllers/channel.js';
+import EmbedCollection from './controllers/collection.js';
+import EmbedDetails from './controllers/details.js';
 
 import channelTemplate from './templates/channel.html';
 import collectionTemplate from './templates/collection.html';
+import standaloneCollectionTemplate from './templates/collection-standalone.html';
 import mediaTemplate from './templates/media.html';
 import videoDetailsTemplate from './templates/video-details.html';
 
@@ -14,15 +18,47 @@ import "./styles/sw-embed.css";
 
 class ScreenweaveEmbed {
   static async setup() {
+    //identify root elements
     const channelElements = document.querySelectorAll("sw-channel");
-    for(const channelElement of channelElements) ScreenweaveEmbed.hideChannelSubcomponents(channelElement);
-    const data = await Appdata.loadData(channelElements);
+    const standaloneCollectionElements = document.querySelectorAll("sw-collection:not(sw-channel sw-collection)");
+    const standaloneVideoDetailsElements = document.querySelectorAll("sw-video-details:not(sw-channel sw-video-details)");
+
+    //gather invite codes and initiate loading states
+    let inviteCodes = [];
+    for(const channelElement of channelElements) {
+      EmbedChannel.hideChannelSubcomponents(channelElement);
+      const inviteCode = channelElement.getAttribute("sw-invite-code");
+      if(inviteCode) inviteCodes.push(inviteCode);
+    }
+    for(const collectionElement of standaloneCollectionElements) {
+      EmbedCollection.hideSubcomponents(collectionElement);
+      const inviteCode = collectionElement.getAttribute("sw-invite-code");
+      if(inviteCode) inviteCodes.push(inviteCode);
+    }
+    for(const detailsElement of standaloneVideoDetailsElements) {
+      const inviteCode = detailsElement.getAttribute("sw-invite-code");
+      if(inviteCode) inviteCodes.push(inviteCode);
+    }
+
+    //load and show data
+    const data = await Appdata.loadData(inviteCodes);
     if(!data) return null;
     for(const channelElement of channelElements) {
+      const channelObject = 
       ScreenweaveEmbed.normalizeChannel(channelElement);
-      await ScreenweaveEmbed.insertData(channelElement, data.channelsById[data.code2id[channelElement.getAttribute("code")]]);
-      ScreenweaveEmbed.showCollections(channelElement);
+      await EmbedChannel.insertData(channelElement, data.channelsById[data.code2id[channelElement.getAttribute("sw-invite-code")]]);
+      EmbedChannel.showCollections(channelElement);
       channelElement.style.visibility = "visible";
+    }
+    for(const collectionElement of standaloneCollectionElements) {
+      ScreenweaveEmbed.normalizeStandaloneCollection(collectionElement);
+      await EmbedCollection.insertData(collectionElement, data.channelsById[data.code2id[collectionElement.getAttribute("sw-invite-code")]]);
+      EmbedCollection.showCollection(collectionElement);
+      collectionElement.style.visibility = "visible";
+    }
+    for(const detailsElement of standaloneVideoDetailsElements) {
+      ScreenweaveEmbed.normalizeStandaloneVideoDetails(detailsElement);
+      EmbedDetails.insertData(detailsElement, data.channelsById[data.code2id[detailsElement.getAttribute("sw-invite-code")]])
     }
   }
 
@@ -30,9 +66,24 @@ class ScreenweaveEmbed {
   static normalizeChannel(channelElement) {
     if(channelElement.children.length < 1)
       channelElement.innerHTML = channelTemplate;
-      ScreenweaveEmbed.normalizeFirstRemoveRest(channelElement.querySelectorAll("sw-collection"), collectionTemplate);
-      ScreenweaveEmbed.normalizeFirstRemoveRest(channelElement.querySelectorAll("sw-collection sw-media"), mediaTemplate);
-      ScreenweaveEmbed.normalizeFirstRemoveRest(channelElement.querySelectorAll("sw-video-details"), videoDetailsTemplate);
+    ScreenweaveEmbed.normalizeFirstRemoveRest(channelElement.querySelectorAll("sw-collection"), collectionTemplate);
+    ScreenweaveEmbed.normalizeFirstRemoveRest(channelElement.querySelectorAll("sw-collection sw-media"), mediaTemplate);
+    ScreenweaveEmbed.normalizeFirstRemoveRest(channelElement.querySelectorAll("sw-video-details"), videoDetailsTemplate);
+  }
+
+  //Provide default content to empty sw-* tags and remove duplicate subcomponents
+  static normalizeStandaloneCollection(collectionElement) {
+    if(collectionElement.children.length < 1)
+      collectionElement.innerHTML = standaloneCollectionTemplate;
+    ScreenweaveEmbed.normalizeFirstRemoveRest(collectionElement.querySelectorAll("sw-media"), mediaTemplate);
+    ScreenweaveEmbed.normalizeFirstRemoveRest(collectionElement.querySelectorAll("sw-video-details"), videoDetailsTemplate);
+  }
+
+
+  //Provide default content to empty sw-* tags
+  static normalizeStandaloneVideoDetails(detailsElement) {
+    if(detailsElement.children.length < 1)
+      detailsElement.innerHTML = videoDetailsTemplate;
   }
 
   static normalizeFirstRemoveRest(elements, template) {
@@ -48,110 +99,7 @@ class ScreenweaveEmbed {
     }
   }
 
-  static async insertData(channelElement, channelData) {
-    //fill in channel level data
-    const bannerElements = channelElement.querySelectorAll("[sw-channel-banner]");
-    for(const bannerElement of bannerElements) bannerElement.setAttribute("src", channelData.bannerUrl);
 
-    //iterate collections
-    const oldCollectionElement = channelElement.querySelector("sw-collection");
-    const newCollectionsContainer = document.createElement("span");
-    if(!oldCollectionElement) {
-      console.log(`Channel ${channelData.id} contained no collection tag!`);
-    }else{
-      for(const collectionObject of channelData.collections) {
-        const collectionElementClone = oldCollectionElement.cloneNode(true);
-        //fill in collection level data
-        for(const collectionNameElement of collectionElementClone.querySelectorAll("[sw-collection-name]"))
-          collectionNameElement.textContent = collectionObject.name;
-
-        //iterate media
-        const oldMediaElement = collectionElementClone.querySelector("sw-media");
-        const newMediaContainer = document.createElement("span");
-        if(!oldMediaElement) {
-          console.log(`Collection elements in channel ${channelData.id} contain no media tag!`);
-        }else{
-          for(const mediaObject of collectionObject.media) {
-            const mediaElementClone = oldMediaElement.cloneNode(true);
-            //fill in media level data
-            for(const mediaLinkElement of mediaElementClone.querySelectorAll("[sw-media-link]"))
-              mediaLinkElement.onclick = () => {ScreenweaveEmbed.showVideoDetails(channelElement, mediaObject)};
-            for(const mediaLinkElement of mediaElementClone.querySelectorAll("[sw-media-thumbnail]"))
-              mediaLinkElement.setAttribute("src", mediaObject.thumbnailUrl);
-            for(const mediaLinkElement of mediaElementClone.querySelectorAll("[sw-media-name]"))
-              mediaLinkElement.textContent = mediaObject.title;
-            
-            //add new media to container
-            newMediaContainer.appendChild(mediaElementClone);
-          }
-          //replace original media tag with container of data-filled media
-          oldMediaElement.parentNode.replaceChild(newMediaContainer, oldMediaElement);
-        }
-        
-        //add new collection to container
-        newCollectionsContainer.appendChild(collectionElementClone);
-      }
-      //replace original collection tag with container of data-filled collections
-      oldCollectionElement.parentNode.replaceChild(newCollectionsContainer, oldCollectionElement);
-    }
-
-    //universal parts of Video Details
-    const videoDetailsElement = channelElement.querySelector("sw-video-details");
-    if(!videoDetailsElement) {
-      console.log(`Channel ${channelData.id} contained no video details tag!`);
-    }else{
-      for(const backElement of videoDetailsElement.querySelectorAll("[sw-video-details-back]"))
-        backElement.onclick = () => {ScreenweaveEmbed.showCollections(channelElement)};
-    }
-  }
-
-  static hideChannelSubcomponents(channelElement) {
-    for(const collection of channelElement.querySelectorAll("sw-collection"))
-      collection.style.display = "none";
-    for(const details of channelElement.querySelectorAll("sw-video-details")) {
-      for(const videoElement of details.querySelectorAll("video")) {
-        videojs(videoElement).dispose();
-      }
-      details.style.display = "none";
-    }
-  }
-
-  static showCollections(channelElement) {
-    ScreenweaveEmbed.hideChannelSubcomponents(channelElement);
-    for(const collection of channelElement.querySelectorAll("sw-collection"))
-      collection.style.display = null;
-  }
-
-  static showVideoDetails(channelElement, mediaObject) {
-    ScreenweaveEmbed.hideChannelSubcomponents(channelElement);
-    for(const details of channelElement.querySelectorAll("sw-video-details")) {
-      details.style.display = null;
-      for(const videoElementWrapper of details.querySelectorAll("[sw-player-video-tag-wrapper]")) {
-        videoElementWrapper.innerHTML = "<video class='video-js vjs-big-play-centered vjs-fluid'></video>";
-        for(const videoElement of videoElementWrapper.querySelectorAll("video")) {
-          videojs(videoElement, {
-            controls: true,
-            poster: mediaObject.thumbnailUrl,
-            sources: [
-              {
-                src: mediaObject.url,
-                type: "application/vnd.apple.mpegurl",
-              },
-            ],
-            html5: {
-              vhs: {
-                useDevicePixelRatio: true,
-              },
-            },
-          });
-        }
-      }
-      for(const titleElement of details.querySelectorAll("[sw-video-details-title]"))
-        titleElement.textContent = mediaObject.title;
-      for(const descriptionElement of details.querySelectorAll("[sw-video-details-description]"))
-        descriptionElement.textContent = mediaObject.description;
-    }
-  }
 }
 
 window.addEventListener('load', ScreenweaveEmbed.setup);
