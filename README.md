@@ -46,16 +46,20 @@ You can also use the default layout for nested sw-* tags (by leaving them empty)
   <sw-channel sw-invite-code="INVITECODE">
    <img sw-channel-banner />
    <div>
-    <sw-collection>
-     <h2 sw-collection-name></h2>
-     <sw-media>
-      <a href="#" sw-media-link>
-       <img sw-media-thumbnail />
-       <div sw-media-name></div>
-      </a>
-     </sw-media>
-    </sw-collection>
-    <sw-video-details>
+    <div>
+     <sw-collection>
+      <h2 sw-collection-name></h2>
+      <sw-media>
+       <a href="#" sw-media-link>
+        <img sw-media-thumbnail />
+        <div sw-media-name></div>
+       </a>
+      </sw-media>
+     </sw-collection>
+    </div>
+   </div>
+   <sw-video-details>
+    <div>
      <div>
       <div sw-player-video-tag-wrapper>
        <video class="video-js"></video>
@@ -66,8 +70,15 @@ You can also use the default layout for nested sw-* tags (by leaving them empty)
       <h2 sw-video-details-title></h2>
       <p sw-video-details-description></p>
      </div>
-    </sw-video-details>
-   </div>
+    </div>
+   </sw-video-details>
+   <sw-loading>
+    <div class="lds-dual-ring"></div>
+   </sw-loading>
+   <sw-error>
+    ⚠ <span sw-error-code></span>
+    <span sw-error-message></span>
+   </sw-error>
   </sw-channel>
  </body>
 </html>
@@ -90,7 +101,7 @@ Note that the more your custom layout deviates from the default, the less effect
 ### Standalone collection
 
 - sw-collection can be used alone, without a sw-channel. In this case you'll need to give it the channel invite code and the id of the collection you want it to show.
-- If using a custom layout as shown here note that the layout for a standalone collection is a little different from one inside a channel because it needs its own sw-video-details
+- If using a custom layout, note that the layout for standalone is different compared to when this tag is used inside a channel.
 
 ```html
 <!DOCTYPE html>
@@ -108,6 +119,8 @@ Note that the more your custom layout deviates from the default, the less effect
     <sw-media></sw-media>
    </div>
    <sw-video-details></sw-video-details>
+   <sw-loading></sw-loading>
+   <sw-error></sw-error>
   </sw-collection>
  </body>
 </html>
@@ -117,7 +130,7 @@ Note that the more your custom layout deviates from the default, the less effect
 ### Standalone video details view and HREF navigation
 
 - sw-video-details can be used alone, without a sw-channel. In this case you'll need to give it the channel invite code and the id of the video you want it to show.
-    - Standalone sw-video-details uses the exact same layout as one inside a sw-channel.
+    - If using a custom layout, note that the layout for standalone is different compared to when this tag is used inside a channel.
 - A standalone sw-video-details can take a video ID directly via sw-video-id, or as the name of a query param that will contain the id via sw-video-id-param. If both are used AND the named query param actually exists, then sw-video-id-param will take precedence.
 - All sw-media can optionally take a param sw-href which will cause it to navigate to another path when clicked, instead of switching to an inline video details view. In the given string `{id}` will be replaced with the video id.
     - When using sw-href on a sw-media you MAY omit the inline sw-video-details that the containing channel or standalone collection would normally require.
@@ -136,8 +149,12 @@ Note that the more your custom layout deviates from the default, the less effect
  </head>
  <body>
   <sw-collection sw-invite-code="INVITECODE" sw-collection-id="1">
-   <h2 sw-collection-name></h2>
-   <sw-media sw-href="details.html?vid={id}"></sw-media>
+   <div>
+    <h2 sw-collection-name></h2>
+    <sw-media sw-href="details.html?vid={id}"></sw-media>
+   </div>
+   <sw-loading></sw-loading>
+   <sw-error></sw-error>
   </sw-collection>
  </body>
 </html>
@@ -178,6 +195,8 @@ Embed just a player for 1 video by using a standalone video-details with a bareb
    <div sw-player-video-tag-wrapper>
     <video class="video-js"></video>
    </div>
+   <sw-loading></sw-loading>
+   <sw-error></sw-error>
   </sw-video-details>
  </body>
 </html>

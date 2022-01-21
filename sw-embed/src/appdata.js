@@ -8,8 +8,9 @@ import Collection from "./models/Collection.js";
 export default class Appdata {
   //static apiUrl = "https://screenweave-next.herokuapp.com/"; //stage
   //static apiUrl = "https://api.screenweave.com/"; //prod
-  static apiUrl = "https://launch.screenweave.com/"; //launch?
+  static apiUrl = "https://launch.screenweave.com/"; //prod
   //static apiUrl = "http://192.168.7.55:8080/"; //local dev
+  //static apiUrl = "http://localhost:5000/"; //local dev
 
   /*
     returns {jwt, channelIdAdded, channelIdRemoved}
@@ -18,7 +19,7 @@ export default class Appdata {
     const url = Appdata.apiUrl + "appdata/subscribe";
     const postData = {inviteCodeToRedeem: inviteCode};
     let headers = { "Content-Type": "application/json" };
-    if (existingJwt) {
+    if (existingJwt != null) {
       headers.Authorization = "Bearer " + existingJwt;
     }
 
@@ -27,7 +28,10 @@ export default class Appdata {
       headers: headers,
       body: JSON.stringify(postData),
     });
-    if(!response.ok) return null;
+    if(!response.ok) {
+      console.log("[Appdata API] Subscribe returned failure code");
+      return null;
+    }
     return await response.json();
   }
 
@@ -38,6 +42,10 @@ export default class Appdata {
       method: "GET",
       headers: headers,
     });
+    if(!response.ok) {
+      console.log("[Appdata API] Collections returned failure code");
+      return null;
+    }
     return (await response.json()).collections;
   }
 
@@ -48,6 +56,10 @@ export default class Appdata {
       method: "GET",
       headers: headers,
     });
+    if(!response.ok) {
+      console.log("[Appdata API] Channels returned failure code");
+      return null;
+    }
     return (await response.json()).channels;
   }
 
@@ -60,6 +72,7 @@ export default class Appdata {
     }
     //make sure all channels requested are in jwt
     for(const inviteCode of inviteCodes) {
+      if(!inviteCode) continue;
       if(jwtInfoDecoded.code2id[inviteCode]) continue;
       const jwtResponse = jwtInfoDecoded.jwt === null ? await Appdata.subscribe(inviteCode) : await Appdata.subscribe(inviteCode, jwtInfoDecoded.jwt);
       if(!jwtResponse) return null;
@@ -74,10 +87,12 @@ export default class Appdata {
     const appdataChannels = await Appdata.getChannels(jwtInfoDecoded.jwt);
     if(!appdataChannels) return null;
     for (const appdataChannel of appdataChannels) {
+      if(!appdataChannel) continue;
       const appdataCollections = await Appdata.getCollections(appdataChannel.id, jwtInfoDecoded.jwt);
       if(!appdataCollections) return null;
       let outCollections = [];
       for(const appdataCollection of appdataCollections) {
+        if(!appdataCollection) continue;
         let outMedia = [];
         for(const appdataVideo of appdataCollection.videos) {
           let thumbnailUrl = "";

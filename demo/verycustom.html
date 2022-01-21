@@ -13,6 +13,15 @@
      display: block;
    }
 
+   sw-loading, sw-error, sw-channel > div, sw-channel > sw-video-details {
+     display: none;
+   }
+
+   sw-loading {
+     background-color: rgb(220,220,220);
+     padding: 1em;
+   }
+
    sw-channel > img {
      position: absolute;
      top: 0;
@@ -23,7 +32,7 @@
      z-index: 0;
    }
 
-   sw-channel > div {
+   sw-channel > div, sw-video-details {
      position: relative;
      z-index: 10;
    }
@@ -87,64 +96,70 @@
    h1, h2, h3, h4 {
      display: inline-block;
    }
+
+  /* loading spinner */
+  .lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
   </style>
-  <script async="false">
-    /*
-      Apparently the marquee tag will just stop looping and never show text again if it reaches the end of a loop while having display:none even if that is changed later.
-      It appears to happen in all browsers.
-      This code restarts the looping on certain events to revive marquees affected by the issue.
-    */
-
-    document.addEventListener("DOMContentLoaded", function(event) { 
-      attach();
-    });
-
-    function attach() {
-      for(media of document.querySelectorAll("sw-media")) {
-        media.addEventListener("mouseenter", marq_start);
-      }
-      for(details of document.querySelectorAll("sw-video-details")) {
-        details.addEventListener("mouseenter", marq_start);
-      }
-    }
-
-    function marq_start(event) {
-      for(marq of event.target.querySelectorAll("marquee")) {
-        marq.start();
-      }
-      attach();
-    }
-  </script>
-  <title>Custom everything</title>
+  <title>Custom everything</title> <!-- A channel with fully custom layout very different from the default, using all custom styles -->
  </head>
  <body>
   <sw-channel sw-invite-code="DEVCODE1">
    <img sw-channel-banner />
    <div>
-    <sw-collection>
-     <dl>
-      <dt sw-collection-name></dt>
-      <sw-media>
-       <dd>
-        <a href="#" sw-media-link>
-         <marquee scrolldelay="10" truespeed scrollamount="1">
-          <div sw-media-name></div>
-         </marquee>
-         <img sw-media-thumbnail />
-        </a> 
-       </dd>   
-      </sw-media>
-     </dl>
-    </sw-collection>
-    <sw-video-details>
-     <a href="#" sw-video-details-back>←</a>
-     <h1 sw-video-details-title></h1>
-     <marquee scrolldelay="4" truespeed scrollamount="1" sw-video-details-description></marquee>
-     <div sw-player-video-tag-wrapper>
-      <video class="video-js"></video>
-     </div>
-    </sw-video-details>
+    <div>
+     <sw-collection>
+      <dl>
+       <dt sw-collection-name></dt>
+       <sw-media>
+        <dd>
+         <a href="#" sw-media-link>
+		      <div sw-media-name></div>
+          <img sw-media-thumbnail />
+         </a>
+        </dd>
+       </sw-media>
+	    </dl>
+     </sw-collection>
+    </div>
    </div>
+   <sw-video-details>
+    <a href="#" sw-video-details-back>←</a>
+	  <h1 sw-video-details-title></h1>
+	  <div sw-video-details-description></div>
+    <div sw-player-video-tag-wrapper>
+     <video class="video-js"></video>
+    </div>
+   </sw-video-details>
+   <sw-loading>
+    <div class="lds-dual-ring"></div>
+   </sw-loading>
+   <sw-error>
+    ⚠ <span sw-error-code></span>
+    <span sw-error-message></span>
+   </sw-error>
   </sw-channel>
  </body>
 </html>

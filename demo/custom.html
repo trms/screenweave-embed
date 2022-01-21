@@ -6,22 +6,26 @@
   <script src="../sw-embed/dist/sw-embed.js" defer></script>
   <link rel="stylesheet" href="../sw-embed/dist/sw-embed.css" />
   <link rel="stylesheet" href="demo.css" /> <!-- These demo styles aren't part of the library. They represent the styles of the site that the lib is being used on, and demonstrate that outer styles affect the library elements -->
-  <title>Custom Layout</title>
+  <title>Custom Layout</title> <!-- A channel with fully custom layout same as the default, using default styles -->
  </head>
  <body>
   <sw-channel sw-invite-code="DEVCODE1">
    <img sw-channel-banner />
    <div>
-    <sw-collection>
-     <h2 sw-collection-name></h2>
-     <sw-media>
-      <a href="#" sw-media-link>
-       <img sw-media-thumbnail />
-       <div sw-media-name></div>
-      </a>
-     </sw-media>
-    </sw-collection>
-    <sw-video-details>
+    <div>
+     <sw-collection>
+      <h2 sw-collection-name></h2>
+      <sw-media>
+       <a href="#" sw-media-link>
+        <img sw-media-thumbnail />
+        <div sw-media-name></div>
+       </a>
+      </sw-media>
+     </sw-collection>
+    </div>
+   </div>
+   <sw-video-details>
+    <div>
      <div>
       <div sw-player-video-tag-wrapper>
        <video class="video-js"></video>
@@ -32,8 +36,15 @@
       <h2 sw-video-details-title></h2>
       <p sw-video-details-description></p>
      </div>
-    </sw-video-details>
-   </div>
+    </div>
+   </sw-video-details>
+   <sw-loading>
+    <div class="lds-dual-ring"></div>
+   </sw-loading>
+   <sw-error>
+    ⚠ <span sw-error-code></span>
+    <span sw-error-message></span>
+   </sw-error>
   </sw-channel>
  </body>
 </html>

@@ -6,13 +6,18 @@
   <script src="../sw-embed/dist/sw-embed.js" defer></script>
   <link rel="stylesheet" href="../sw-embed/dist/sw-embed.css" />
   <link rel="stylesheet" href="demo.css" /> <!-- These demo styles aren't part of the library. They represent the styles of the site that the lib is being used on, and demonstrate that outer styles affect the library elements -->
-  <title>Player Only</title>
+  <title>Player Only</title> <!-- Uses a stripped-down Video Details element to show just a player for a single video and nothing else -->
+  <style>
+    body,body>sw-video-details,body>sw-video-details>*{border:0;margin:0;padding:0;}
+  </style>
  </head>
  <body>
   <sw-video-details sw-invite-code="DEVCODE1" sw-video-id="1">
    <div sw-player-video-tag-wrapper>
     <video class="video-js"></video>
    </div>
+   <sw-loading></sw-loading>
+   <sw-error></sw-error>
   </sw-video-details>
  </body>
 </html>
