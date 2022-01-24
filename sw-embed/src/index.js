@@ -1,20 +1,29 @@
 "use strict";
 import "core-js";
 import "regenerator-runtime/runtime";
-import "video.js/dist/video-js.min.css";
 
-import videojs from "video.js";
+/* Since we exclude video.js from the rollup, if we import it here, the compiled code will expect an embedded video.js that isn't there and give runtime errors, even if video.js is loaded some other way.
+  Currently we just deal with the IDE warnings that it's missing and expect the calling code to separately include video.js.
+  Only import it here if we really decide we want to bundle video.js (in which case also remove it from the rollup ignore list)
+*/
+//import videojs from "video.js";
 
 import Appdata from './appdata.js';
 
-import channelTemplate from './templates/channel.html';
-import collectionTemplate from './templates/collection.html';
-import standaloneCollectionTemplate from './templates/collection-standalone.html';
-import mediaTemplate from './templates/media.html';
-import videoDetailsTemplate from './templates/video-details.html';
+import channelTemplate                from './templates/channel.html';
+import collectionTemplate             from './templates/collection.html';
+import standaloneCollectionTemplate   from './templates/collection-standalone.html';
+import mediaTemplate                  from './templates/media.html';
+import videoDetailsTemplate           from './templates/video-details.html';
 import standaloneVideoDetailsTemplate from './templates/video-details-standalone.html';
-import errorTemplate from './templates/error.html';
-import loadingTemplate from './templates/loading.html';
+import errorTemplate                  from './templates/error.html';
+import loadingTemplate                from './templates/loading.html';
+
+/* Importing CSS this way bundles it into our dist CSS. Better to not do this with library styles because
+  then we'll still need to tell users to include them separately only when they aren't using our default styles.
+  Better to exclude it and have the users just include them separately all the time.
+*/
+//import "video.js/dist/video-js.min.css";
 
 import "./styles/sw-embed.css";
 

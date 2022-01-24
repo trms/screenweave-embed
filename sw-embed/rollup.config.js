@@ -5,6 +5,7 @@ import { terser } from "rollup-plugin-terser";
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import css from "rollup-plugin-import-css";
+import ignore from "rollup-plugin-ignore";
 
 const config = {
   input: 'src/index.js',
@@ -13,6 +14,7 @@ const config = {
     format: 'iife'
   },
   plugins: [
+    ignore(["video.js"]),
     json(),
     html({ include: '**/*.html' }),
     css(),

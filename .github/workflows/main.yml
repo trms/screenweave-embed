@@ -19,6 +19,12 @@ jobs:
           npm install
           npm run build
 
+      - name: Copy outputs into version folders
+        run: |
+          buildnumber=`git rev-list --count --first-parent HEAD`
+          foldername="build-${buildnumber}"
+          cp "sw-embed/dist/sw-embed.*" "sw-embed/dist/$foldername/"
+
       - uses: jakejarvis/s3-sync-action@master
         name: publish
         with:
