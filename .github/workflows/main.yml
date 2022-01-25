@@ -21,8 +21,8 @@ jobs:
 
       - name: Copy outputs into version folders
         run: |
-          buildnumber=`git rev-list --count --first-parent HEAD`
-          foldername="build-${buildnumber}"
+          commit=`git rev-parse HEAD`
+          foldername="build-${commit}"
           mkdir "sw-embed/dist/$foldername/"
           cp sw-embed/dist/sw-embed.* "sw-embed/dist/$foldername/"
 
