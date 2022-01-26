@@ -22,9 +22,18 @@ jobs:
       - name: Copy outputs into version folders
         run: |
           commit=`git rev-parse HEAD`
-          foldername="build-${commit}"
-          mkdir "sw-embed/dist/$foldername/"
-          cp sw-embed/dist/sw-embed.* "sw-embed/dist/$foldername/"
+          buildfoldername="build-${commit}"
+          mkdir "sw-embed/dist/$buildfoldername/"
+          cp sw-embed/dist/sw-embed.* "sw-embed/dist/$buildfoldername/"
+          semver=`git tag --points-at HEAD | head -n 1`
+          semverlength=${#semver}
+          if [ "$semverlength" -gt "0" ]; then
+            echo "Tag found, saving semver build"
+            mkdir "sw-embed/dist/$semver/"
+            cp sw-embed/dist/sw-embed.* "sw-embed/dist/$semver/"
+          else
+            printf "No tag found, not saving semver build. \nSemver value: $semver \nLength: $semverlength"
+          fi
 
       - uses: jakejarvis/s3-sync-action@master
         name: publish
