@@ -23,14 +23,8 @@ jobs:
       - name: Copy outputs into version folders
         run: |
           semver=${{github.ref_name}}
-          semverlength=${#semver}
-          if [ "$semverlength" -gt "0" ]; then
-            echo "Tag found, saving semver build"
-            mkdir "sw-embed/dist/$semver/"
-            cp sw-embed/dist/sw-embed.* "sw-embed/dist/$semver/"
-          else
-            printf "No tag found, not saving semver build. \nSemver value: $semver \nLength: $semverlength"
-          fi
+          mkdir "sw-embed/dist/$semver/"
+          cp sw-embed/dist/sw-embed.* "sw-embed/dist/$semver/"
 
       - uses: jakejarvis/s3-sync-action@master
         name: publish

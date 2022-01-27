@@ -26,3 +26,7 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Files for testing the examples
+test.html
+test.sh
