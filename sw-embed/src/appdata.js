@@ -95,12 +95,16 @@ export default class Appdata {
         if(!appdataCollection) continue;
         let outMedia = [];
         for(const appdataVideo of appdataCollection.videos) {
-          let thumbnailUrl = "";
-          for (const [key, value] of Object.entries(appdataVideo.thumbnails)) {
-            thumbnailUrl = value;
-            break;
-          }
-          outMedia.push(new Media({url: appdataVideo.url, type: appdataVideo.type, title: appdataVideo.title, thumbnailUrl: thumbnailUrl, showId: appdataVideo.show_id, description: appdataVideo.description}));
+          outMedia.push(new Media({
+            url: appdataVideo.url,
+            type: appdataVideo.type,
+            title: appdataVideo.title,
+            smallThumbnailUrl: appdataVideo.thumbnails["small"],
+            mediumThumbnailUrl: appdataVideo.thumbnails["medium"],
+            largeThumbnailUrl: appdataVideo.thumbnails["large"],
+            showId: appdataVideo.show_id,
+            description: appdataVideo.description
+          }));
         }
         outCollections.push(new Collection({id: appdataCollection.id, name: appdataCollection.name, media: outMedia}));
       }

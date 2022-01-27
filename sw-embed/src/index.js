@@ -145,7 +145,7 @@ class ScreenweaveEmbed {
       for(const videoElement of videoElementWrapper.querySelectorAll("video")) {
         videojs(videoElement, {
           controls: true,
-          poster: mediaObject.thumbnailUrl,
+          poster: mediaObject.largeThumbnailUrl,
           sources: [
             {
               src: mediaObject.url,
@@ -302,7 +302,7 @@ class ScreenweaveEmbed {
       }
     }
     for(const mediaThumbnailElement of mediaElement.querySelectorAll("[sw-media-thumbnail]"))
-      mediaThumbnailElement.setAttribute("src", mediaObject.thumbnailUrl);
+      mediaThumbnailElement.setAttribute("src", mediaObject.mediumThumbnailUrl);
     for(const mediaNameElement of mediaElement.querySelectorAll("[sw-media-name]"))
       mediaNameElement.textContent = mediaObject.title;
   }
