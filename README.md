@@ -18,8 +18,8 @@ That's it! An interface will be generated from your channel and allow browsing o
 <html>
  <head>
   <meta charset="utf-8" />
-  <script src="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.0/sw-embed.js" defer></script>
-  <link rel="stylesheet" href="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.0/sw-embed.css" />
+  <script src="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.1/sw-embed.js" defer></script>
+  <link rel="stylesheet" href="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.1/sw-embed.css" />
   <script src="https://vjs.zencdn.net/7.17.0/video.min.js" defer></script>
   <link href="https://vjs.zencdn.net/7.17.0/video-js.css" rel="stylesheet" />
   <title>Minimal example</title>
@@ -40,8 +40,8 @@ You can also use the default layout for nested sw-* tags (by leaving them empty)
 <html>
  <head>
   <meta charset="utf-8" />
-  <script src="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.0/sw-embed.js" defer></script>
-  <link rel="stylesheet" href="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.0/sw-embed.css" />
+  <script src="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.1/sw-embed.js" defer></script>
+  <link rel="stylesheet" href="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.1/sw-embed.css" />
   <script src="https://vjs.zencdn.net/7.17.0/video.min.js" defer></script>
   <link href="https://vjs.zencdn.net/7.17.0/video-js.css" rel="stylesheet" />
   <title>Custom Layout</title>
@@ -96,7 +96,7 @@ Note that the more your custom layout deviates from the default, the less effect
  [ . . . ]
  <head>
   <meta charset="utf-8" />
-  <script src="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.0/sw-embed.js" defer></script>
+  <script src="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.1/sw-embed.js" defer></script>
   <script src="https://vjs.zencdn.net/7.17.0/video.min.js" defer></script>
   <link href="https://vjs.zencdn.net/7.17.0/video-js.css" rel="stylesheet" />
  </head>
@@ -113,8 +113,8 @@ Note that the more your custom layout deviates from the default, the less effect
 <html>
  <head>
   <meta charset="utf-8" />
-  <script src="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.0/sw-embed.js" defer></script>
-  <link rel="stylesheet" href="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.0/sw-embed.css" />
+  <script src="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.1/sw-embed.js" defer></script>
+  <link rel="stylesheet" href="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.1/sw-embed.css" />
   <script src="https://vjs.zencdn.net/7.17.0/video.min.js" defer></script>
   <link href="https://vjs.zencdn.net/7.17.0/video-js.css" rel="stylesheet" />
   <title>Standalone collection</title>
@@ -151,8 +151,8 @@ Note that the more your custom layout deviates from the default, the less effect
 <html>
  <head>
   <meta charset="utf-8" />
-  <script src="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.0/sw-embed.js" defer></script>
-  <link rel="stylesheet" href="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.0/sw-embed.css" />
+  <script src="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.1/sw-embed.js" defer></script>
+  <link rel="stylesheet" href="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.1/sw-embed.css" />
   <title>HREF navigation on individual videos</title>
  </head>
  <body>
@@ -175,8 +175,8 @@ Note that the more your custom layout deviates from the default, the less effect
 <html>
  <head>
   <meta charset="utf-8" />
-  <script src="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.0/sw-embed.js" defer></script>
-  <link rel="stylesheet" href="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.0/sw-embed.css" />
+  <script src="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.1/sw-embed.js" defer></script>
+  <link rel="stylesheet" href="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.1/sw-embed.css" />
   <script src="https://vjs.zencdn.net/7.17.0/video.min.js" defer></script>
   <link href="https://vjs.zencdn.net/7.17.0/video-js.css" rel="stylesheet" />
   <title>Standalone Video Details which looks for a query param for video ID and also has a default</title>
@@ -211,8 +211,8 @@ Embed just a player for 1 video by using a standalone video-details with a bareb
 <html>
  <head>
   <meta charset="utf-8" />
-  <script src="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.0/sw-embed.js" defer></script>
-  <link rel="stylesheet" href="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.0/sw-embed.css" />
+  <script src="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.1/sw-embed.js" defer></script>
+  <link rel="stylesheet" href="https://screenweave-launch.s3.us-east-2.amazonaws.com/lib/sw-embed/v1.0.1/sw-embed.css" />
   <script src="https://vjs.zencdn.net/7.17.0/video.min.js" defer></script>
   <link href="https://vjs.zencdn.net/7.17.0/video-js.css" rel="stylesheet" />
   <title>Player Only</title>
