@@ -19,13 +19,20 @@ jobs:
           npm install
           npm run build
 
+      # provides tag name "from commit that triggered the action" as standalone value ${{ steps.tagName.outputs.tag }} or env var that can be used in shell code like $GIT_TAG_NAME
+      - uses: little-core-labs/get-git-tag@v3.0.1
+        id: tagName
+        with:
+          tagRegex: ""
+          tagRegexGroup: 1
+
       - name: Copy outputs into version folders
         run: |
           commit=`git rev-parse HEAD`
           buildfoldername="build-${commit}"
           mkdir "sw-embed/dist/$buildfoldername/"
           cp sw-embed/dist/sw-embed.* "sw-embed/dist/$buildfoldername/"
-          semver=`git tag --points-at HEAD | head -n 1`
+          semver=$GIT_TAG_NAME
           semverlength=${#semver}
           if [ "$semverlength" -gt "0" ]; then
             echo "Tag found, saving semver build"
