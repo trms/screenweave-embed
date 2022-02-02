@@ -134,9 +134,10 @@ class ScreenweaveEmbed {
 
   static showContent(rootElement) {
     const rootTagName = rootElement.tagName.toLowerCase();
+    const display = rootTagName == 'sw-video-details' ? 'grid' : 'block';
     ScreenweaveEmbed.hideSubcomponents(rootElement, true);
     for(const contentElement of rootElement.querySelectorAll(rootTagName + " > div"))
-      contentElement.style.display = "block";
+      contentElement.style.display = display;
   }
 
   static swapVideo(videoDetailsElement, mediaObject) {
