@@ -202,10 +202,9 @@ Note that the more your custom layout deviates from the default, the less effect
 </html>
 ```
 
-### Player only + player.js support
+### Player only
 
-- Embed just a player for 1 video by using a standalone video-details with a barebones custom layout.
-- Enable player.js support by having player.js included on your page.
+Embed just a player for 1 video by using a standalone video-details with a barebones custom layout.
 
 ```html
 <!DOCTYPE html>
@@ -216,7 +215,6 @@ Note that the more your custom layout deviates from the default, the less effect
   <link rel="stylesheet" href="https://embed.screenweave.com/lib/sw-embed/v1.0.2/sw-embed.css" />
   <script src="https://vjs.zencdn.net/7.17.0/video.min.js" defer></script>
   <link href="https://vjs.zencdn.net/7.17.0/video-js.css" rel="stylesheet" />
-  <script src="https://cdn.embed.ly/player-0.1.0.min.js"></script>
   <title>Player Only</title>
  </head>
  <body>

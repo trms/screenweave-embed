@@ -158,12 +158,6 @@ class ScreenweaveEmbed {
               useDevicePixelRatio: true,
             },
           },
-        },
-        function() {
-          if(typeof playerjs !== 'undefined') {
-            const adapter = new playerjs.VideoJSAdapter(this);
-            adapter.ready();
-          }
         });
       }
     }
