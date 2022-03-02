@@ -18,11 +18,6 @@
      display: none;
    }
 
-   sw-loading {
-     background-color: rgb(220,220,220);
-     padding: 1em;
-   }
-
    sw-channel > img {
      position: absolute;
      top: 0;
@@ -97,32 +92,6 @@
    h1, h2, h3, h4 {
      display: inline-block;
    }
-
-  /* loading spinner */
-  .lds-dual-ring {
-    display: inline-block;
-    width: 80px;
-    height: 80px;
-  }
-  .lds-dual-ring:after {
-    content: " ";
-    display: block;
-    width: 64px;
-    height: 64px;
-    margin: 8px;
-    border-radius: 50%;
-    border: 6px solid #fff;
-    border-color: #fff transparent #fff transparent;
-    animation: lds-dual-ring 1.2s linear infinite;
-  }
-  @keyframes lds-dual-ring {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
   </style>
   <title>Custom everything</title> <!-- A channel with fully custom layout very different from the default, using all custom styles -->
  </head>
@@ -155,7 +124,7 @@
     </div>
    </sw-video-details>
    <sw-loading>
-    <div class="lds-dual-ring"></div>
+    <div></div>
    </sw-loading>
    <sw-error>
     ⚠ <span sw-error-code></span>

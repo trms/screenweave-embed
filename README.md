@@ -77,7 +77,7 @@ You can also use the default layout for nested sw-* tags (by leaving them empty)
     </div>
    </sw-video-details>
    <sw-loading>
-    <div class="lds-dual-ring"></div>
+    <div></div>
    </sw-loading>
    <sw-error>
     ⚠ <span sw-error-code></span>
