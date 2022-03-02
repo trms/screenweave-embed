@@ -11,11 +11,6 @@ sw-video-details:not(sw-channel sw-video-details, sw-collection sw-video-details
   display: none;
 }
 
-sw-loading {
-  background-color: rgb(220,220,220);
-  padding: 1em;
-}
-
 sw-channel > div > img, sw-channel > img {
   width: 100%;
   vertical-align: top;
